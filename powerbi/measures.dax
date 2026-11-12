@@ -1,0 +1,239 @@
+// DAX measures for the two-chapter HR pack.
+// Not executed in Power BI Desktop. No .pbix is in this repository
+// (Power BI Desktop runs on Windows only).
+//
+// CHAPTER A and CHAPTER B are unconnected models. Do not write a
+// measure that references facts from both sides. Do not name any
+// measure "Saudization" or "Nitaqat": chapter A reports an LFS
+// Saudi share of all employment; chapter B has no nationality field.
+
+
+// ---------------------------------------------------------------------------
+// Chapter A — GASTAT Labour Force Survey
+// Filter employment visuals to a single quarter, or use the Latest measures.
+// Summing employed counts across quarters would double-count people.
+// ---------------------------------------------------------------------------
+
+Employed (LFS) =
+SUM ( fct_employment_national[total] )
+
+Saudi Employed (LFS) =
+SUM ( fct_employment_national[saudi] )
+
+Non-Saudi Employed (LFS) =
+SUM ( fct_employment_national[non_saudi] )
+
+LFS Saudi Share =
+DIVIDE ( [Saudi Employed (LFS)], [Employed (LFS)] )
+
+Employed Latest (LFS) =
+CALCULATE (
+    [Employed (LFS)],
+    LASTNONBLANK ( dim_quarter[period_start], [Employed (LFS)] )
+)
+
+Saudi Employed Latest (LFS) =
+CALCULATE (
+    [Saudi Employed (LFS)],
+    LASTNONBLANK ( dim_quarter[period_start], [Saudi Employed (LFS)] )
+)
+
+LFS Saudi Share Latest =
+CALCULATE (
+    [LFS Saudi Share],
+    LASTNONBLANK ( dim_quarter[period_start], [Employed (LFS)] )
+)
+
+LFS Saudi Share YoY pp =
+VAR CurrentShare = [LFS Saudi Share]
+VAR PriorShare =
+    CALCULATE ( [LFS Saudi Share], DATEADD ( dim_quarter[period_start], -4, QUARTER ) )
+RETURN
+    CurrentShare - PriorShare
+
+Employed by Region (LFS) =
+SUM ( fct_employment_region[total] )
+
+Saudi Employed by Region (LFS) =
+SUM ( fct_employment_region[saudi] )
+
+LFS Saudi Share by Region =
+DIVIDE ( [Saudi Employed by Region (LFS)], [Employed by Region (LFS)] )
+
+Region Rank (LFS Share) =
+RANKX (
+    ALL ( dim_region[region_name] ),
+    [LFS Saudi Share by Region],
+    ,
+    DESC,
+    DENSE
+)
+
+Saudi Unemployment Rate =
+CALCULATE (
+    AVERAGE ( fct_unemployment[unemp_total] ),
+    fct_unemployment[nationality] = "saudi"
+)
+
+Saudi Female Unemployment Rate =
+CALCULATE (
+    AVERAGE ( fct_unemployment[unemp_female] ),
+    fct_unemployment[nationality] = "saudi"
+)
+
+Saudi Male Unemployment Rate =
+CALCULATE (
+    AVERAGE ( fct_unemployment[unemp_male] ),
+    fct_unemployment[nationality] = "saudi"
+)
+
+Saudi Unemployment Gender Gap pp =
+[Saudi Female Unemployment Rate] - [Saudi Male Unemployment Rate]
+
+Saudi Female Participation =
+CALCULATE (
+    AVERAGE ( fct_unemployment[part_female] ),
+    fct_unemployment[nationality] = "saudi"
+)
+
+Saudi Youth Unemployment Rate =
+CALCULATE (
+    AVERAGE ( fct_youth[unemp_youth] ),
+    fct_youth[nationality] = "saudi",
+    fct_youth[sex] = "total"
+)
+
+Saudi Youth Gap pp =
+CALCULATE (
+    AVERAGE ( fct_youth[youth_gap_pp] ),
+    fct_youth[nationality] = "saudi",
+    fct_youth[sex] = "total"
+)
+
+Saudi Average Wage (SAR) =
+CALCULATE (
+    AVERAGE ( fct_wages[wage] ),
+    fct_wages[nationality] = "saudi",
+    fct_wages[sex] = "total",
+    fct_wages[is_national] = TRUE ()
+)
+
+Non-Saudi Average Wage (SAR) =
+CALCULATE (
+    AVERAGE ( fct_wages[wage] ),
+    fct_wages[nationality] = "non_saudi",
+    fct_wages[sex] = "total",
+    fct_wages[is_national] = TRUE ()
+)
+
+Saudi to Non-Saudi Wage Ratio =
+DIVIDE ( [Saudi Average Wage (SAR)], [Non-Saudi Average Wage (SAR)] )
+
+
+// ---------------------------------------------------------------------------
+// Chapter B — fictional IBM HR Attrition sample
+// 1,470 invented employees. Not a KSA workforce. No nationality field.
+// A Saudization measure on this table cannot be written honestly.
+// ---------------------------------------------------------------------------
+
+Headcount (IBM sample) =
+COUNTROWS ( fct_employee )
+
+Leavers (IBM sample) =
+CALCULATE (
+    COUNTROWS ( fct_employee ),
+    fct_employee[Attrition] = "Yes"
+)
+
+Stayers (IBM sample) =
+CALCULATE (
+    COUNTROWS ( fct_employee ),
+    fct_employee[Attrition] = "No"
+)
+
+Attrition Rate (IBM sample) =
+DIVIDE ( [Leavers (IBM sample)], [Headcount (IBM sample)] )
+
+Overtime Attrition Rate (IBM sample) =
+CALCULATE (
+    [Attrition Rate (IBM sample)],
+    fct_employee[OverTime] = "Yes"
+)
+
+No-Overtime Attrition Rate (IBM sample) =
+CALCULATE (
+    [Attrition Rate (IBM sample)],
+    fct_employee[OverTime] = "No"
+)
+
+Overtime Attrition Lift (IBM sample) =
+DIVIDE (
+    [Overtime Attrition Rate (IBM sample)],
+    [No-Overtime Attrition Rate (IBM sample)]
+)
+
+Leavers Working Overtime (IBM sample) =
+CALCULATE (
+    [Leavers (IBM sample)],
+    fct_employee[OverTime] = "Yes"
+)
+
+Overtime Share of Leavers (IBM sample) =
+DIVIDE (
+    [Leavers Working Overtime (IBM sample)],
+    [Leavers (IBM sample)]
+)
+
+Average Monthly Income (IBM sample) =
+AVERAGE ( fct_employee[MonthlyIncome] )
+
+Leaver Average Income (IBM sample) =
+CALCULATE (
+    [Average Monthly Income (IBM sample)],
+    fct_employee[Attrition] = "Yes"
+)
+
+Stayer Average Income (IBM sample) =
+CALCULATE (
+    [Average Monthly Income (IBM sample)],
+    fct_employee[Attrition] = "No"
+)
+
+Median Tenure Years (IBM sample) =
+MEDIAN ( fct_employee[YearsAtCompany] )
+
+Leaver Median Tenure (IBM sample) =
+CALCULATE (
+    [Median Tenure Years (IBM sample)],
+    fct_employee[Attrition] = "Yes"
+)
+
+First-Year Headcount (IBM sample) =
+CALCULATE (
+    [Headcount (IBM sample)],
+    fct_employee[TenureBand] = "0-1 years"
+)
+
+First-Year Attrition Rate (IBM sample) =
+CALCULATE (
+    [Attrition Rate (IBM sample)],
+    fct_employee[TenureBand] = "0-1 years"
+)
+
+Lowest-Quartile Attrition Rate (IBM sample) =
+CALCULATE (
+    [Attrition Rate (IBM sample)],
+    fct_employee[IncomeQuartile] = "Q1 lowest"
+)
+
+Attrition Rate by Job Role (IBM sample) =
+[Attrition Rate (IBM sample)]
+
+Job Role Attrition Rank (IBM sample) =
+RANKX (
+    ALL ( dim_job_role[JobRole] ),
+    [Attrition Rate (IBM sample)],
+    ,
+    DESC,
+    DENSE
+)

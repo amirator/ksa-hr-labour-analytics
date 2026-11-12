@@ -1,0 +1,45 @@
+%%{init: {"theme": "base", "themeVariables": {"primaryColor": "#E8F0F6", "primaryTextColor": "#1F2A44", "primaryBorderColor": "#1F2A44", "lineColor": "#2E6B8A", "fontFamily": "DejaVu Sans, sans-serif"}, "flowchart": {"curve": "basis", "htmlLabels": true, "padding": 12}}}%%
+flowchart LR
+    subgraph A["Chapter A — GASTAT Labour Force Survey<br/>official KSA statistics · not Nitaqat"]
+        direction TB
+        dq["dim_quarter<br/>period_start PK"]
+        dr["dim_region<br/>region_name PK"]
+        dn["dim_nationality<br/>nationality PK"]
+        fen["fct_employment_national<br/>quarter grain"]
+        fer["fct_employment_region<br/>region × quarter"]
+        fu["fct_unemployment"]
+        fy["fct_youth"]
+        fw["fct_wages"]
+        dq --> fen
+        dq --> fer
+        dq --> fu
+        dq --> fy
+        dq --> fw
+        dr --> fer
+        dr --> fw
+        dn --> fu
+        dn --> fy
+        dn --> fw
+    end
+
+    subgraph GAP[" "]
+        direction TB
+        note["NO RELATIONSHIP<br/>Do not join these halves.<br/>No shared key.<br/>No company Saudization measure.<br/>Chapter B has no nationality field."]
+    end
+
+    subgraph B["Chapter B — IBM HR Attrition<br/>fictional sample · 1,470 invented employees · not a KSA workforce"]
+        direction TB
+        dd["dim_department<br/>Department PK"]
+        dj["dim_job_role<br/>JobRole PK"]
+        fe["fct_employee<br/>EmployeeNumber PK<br/>AttritionFlag · TenureBand · IncomeQuartile"]
+        dd --> fe
+        dj --> fe
+    end
+
+    A -.- GAP
+    GAP -.- B
+
+    style GAP fill:#F8E6D0,stroke:#C56A1A,stroke-width:2px,color:#1F2A44
+    style note fill:#F8E6D0,stroke:#C56A1A,color:#1F2A44
+    style A fill:#E8F0F6,stroke:#1F2A44,color:#1F2A44
+    style B fill:#F3EDE6,stroke:#C56A1A,color:#1F2A44

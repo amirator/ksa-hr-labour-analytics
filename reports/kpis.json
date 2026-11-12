@@ -1,0 +1,228 @@
+{
+  "first_quarter": "2016-Q2",
+  "last_employment_quarter": "2024-Q4",
+  "last_unemp_quarter": "2026-Q2",
+  "employed_first": 11686115,
+  "employed_last": 18070431,
+  "saudi_employed_first": 5003618,
+  "saudi_employed_last": 6286358,
+  "nonsaudi_employed_last": 11784073,
+  "saudi_share_first_pct": 42.82,
+  "saudi_share_last_pct": 34.79,
+  "saudi_share_change_pp": -8.03,
+  "break_from": "2020-Q4",
+  "break_to": "2021-Q1",
+  "break_share_from_pct": 45.89,
+  "break_share_to_pct": 35.41,
+  "break_share_pp": -10.48,
+  "break_saudi_change": -1730601,
+  "break_nonsaudi_change": 1191347,
+  "share_postbreak_change_pp": -0.62,
+  "top_region": "Jazan",
+  "top_region_share_pct": 47.32,
+  "bottom_region": "Riyadh",
+  "bottom_region_share_pct": 31.97,
+  "saudi_unemp_pct": 6.48,
+  "saudi_unemp_female_pct": 9.56,
+  "saudi_unemp_male_pct": 4.84,
+  "saudi_unemp_gap_pp": 4.72,
+  "saudi_unemp_yoy_pp": -0.32,
+  "saudi_unemp_first_pct": 12.17,
+  "saudi_female_part_pct": 33.68,
+  "wage_quarter": "2024-Q4",
+  "wage_saudi": 10088.1,
+  "wage_nonsaudi": 4433.6,
+  "wage_ratio": 2.28,
+  "wage_saudi_male": 11019.5,
+  "wage_saudi_female": 7983.6,
+  "youth_saudi_pct": 15.16,
+  "youth_saudi_female_pct": 19.48,
+  "youth_gap_pp": 8.68,
+  "youth_vs_first_pp": -10.82,
+  "ibm_sha256": "a5c31e38bd7fafc9bc333884eb181b06b41b8e5e488e8f7ccb27199fb3be7659",
+  "ibm_n": 1470,
+  "ibm_leavers": 237,
+  "ibm_stayers": 1233,
+  "ibm_attrition_pct": 16.12,
+  "ibm_ot_yes_pct": 30.53,
+  "ibm_ot_yes_leavers": 127,
+  "ibm_ot_yes_n": 416,
+  "ibm_ot_no_pct": 10.44,
+  "ibm_ot_no_leavers": 110,
+  "ibm_ot_no_n": 1054,
+  "ibm_ot_lift": 2.93,
+  "ibm_ot_share_of_leavers_pct": 53.59,
+  "ibm_tenure0_pct": 34.88,
+  "ibm_tenure0_n": 215,
+  "ibm_income_q1_pct": 29.27,
+  "ibm_income_q1_n": 369,
+  "ibm_income_q1_max": 2911,
+  "ibm_sales_rep_pct": 39.76,
+  "ibm_sales_rep_n": 83,
+  "ibm_single_pct": 25.53,
+  "ibm_single_n": 470,
+  "ibm_travel_pct": 24.91,
+  "ibm_travel_n": 277,
+  "ibm_leaver_income_median": 3202,
+  "ibm_stayer_income_median": 5204,
+  "ibm_leaver_income_mean": 4787.1,
+  "ibm_stayer_income_mean": 6832.7,
+  "ibm_leaver_tenure_median": 3.0,
+  "ibm_stayer_tenure_median": 6.0,
+  "ibm_leaver_age_median": 32.0,
+  "ibm_stayer_age_median": 36.0,
+  "ibm_has_nationality": false,
+  "dept_rates": [
+    {
+      "department": "Sales",
+      "rate_pct": 20.63,
+      "leavers": 92,
+      "n": 446
+    },
+    {
+      "department": "Human Resources",
+      "rate_pct": 19.05,
+      "leavers": 12,
+      "n": 63
+    },
+    {
+      "department": "Research & Development",
+      "rate_pct": 13.84,
+      "leavers": 133,
+      "n": 961
+    }
+  ],
+  "role_rates": [
+    {
+      "job_role": "Sales Representative",
+      "rate_pct": 39.76,
+      "leavers": 33,
+      "n": 83
+    },
+    {
+      "job_role": "Laboratory Technician",
+      "rate_pct": 23.94,
+      "leavers": 62,
+      "n": 259
+    },
+    {
+      "job_role": "Human Resources",
+      "rate_pct": 23.08,
+      "leavers": 12,
+      "n": 52
+    },
+    {
+      "job_role": "Sales Executive",
+      "rate_pct": 17.48,
+      "leavers": 57,
+      "n": 326
+    },
+    {
+      "job_role": "Research Scientist",
+      "rate_pct": 16.1,
+      "leavers": 47,
+      "n": 292
+    },
+    {
+      "job_role": "Manufacturing Director",
+      "rate_pct": 6.9,
+      "leavers": 10,
+      "n": 145
+    },
+    {
+      "job_role": "Healthcare Representative",
+      "rate_pct": 6.87,
+      "leavers": 9,
+      "n": 131
+    },
+    {
+      "job_role": "Manager",
+      "rate_pct": 4.9,
+      "leavers": 5,
+      "n": 102
+    },
+    {
+      "job_role": "Research Director",
+      "rate_pct": 2.5,
+      "leavers": 2,
+      "n": 80
+    }
+  ],
+  "tenure_rates": [
+    {
+      "band": "0-1 years",
+      "rate_pct": 34.88,
+      "leavers": 75,
+      "n": 215
+    },
+    {
+      "band": "2-3 years",
+      "rate_pct": 18.43,
+      "leavers": 47,
+      "n": 255
+    },
+    {
+      "band": "4-5 years",
+      "rate_pct": 13.07,
+      "leavers": 40,
+      "n": 306
+    },
+    {
+      "band": "6-10 years",
+      "rate_pct": 12.28,
+      "leavers": 55,
+      "n": 448
+    },
+    {
+      "band": "11+ years",
+      "rate_pct": 8.13,
+      "leavers": 20,
+      "n": 246
+    }
+  ],
+  "income_rates": [
+    {
+      "band": "Q1 lowest",
+      "rate_pct": 29.27,
+      "leavers": 108,
+      "n": 369,
+      "min": 1009,
+      "max": 2911,
+      "median": 2379
+    },
+    {
+      "band": "Q2",
+      "rate_pct": 14.21,
+      "leavers": 52,
+      "n": 366,
+      "min": 2926,
+      "max": 4908,
+      "median": 4032
+    },
+    {
+      "band": "Q3",
+      "rate_pct": 10.63,
+      "leavers": 39,
+      "n": 367,
+      "min": 4930,
+      "max": 8376,
+      "median": 6077
+    },
+    {
+      "band": "Q4 highest",
+      "rate_pct": 10.33,
+      "leavers": 38,
+      "n": 368,
+      "min": 8380,
+      "max": 19999,
+      "median": 13118
+    }
+  ],
+  "honesty": [
+    "Portfolio project on public data, not a client engagement and not employment.",
+    "Chapter A is GASTAT Labour Force Survey household-survey estimates, not GOSI and not Nitaqat.",
+    "Chapter B is a fictional IBM sample of 1,470 invented employees, not a Saudi workforce.",
+    "The two chapters must not be joined. A Saudization ratio is not computed from either file.",
+    "No .pbix is in this repository: Power BI Desktop is not available on Linux. The pack ships Power Query M, DAX, a star-schema diagram and Python-rendered dashboards from the same model."
+  ]
+}
